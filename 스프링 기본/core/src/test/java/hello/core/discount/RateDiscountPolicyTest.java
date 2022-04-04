@@ -1,4 +1,4 @@
-package hello.core.beanfind.discount;
+package hello.core.discount;
 
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Grade;
