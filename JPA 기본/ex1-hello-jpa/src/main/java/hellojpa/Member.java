@@ -16,6 +16,14 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
+    //기간 Period
+    @Embedded
+    private Period workPeriod;
+
+    //주소 Address
+    @Embedded
+    private Address homeAddress;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Team team;
@@ -41,6 +49,22 @@ public class Member extends BaseEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Period getWorkPeriod() {
+        return workPeriod;
+    }
+
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
     public Team getTeam() {
