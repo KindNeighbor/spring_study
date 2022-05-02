@@ -24,4 +24,6 @@ public class Period {
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
+
+
 }
