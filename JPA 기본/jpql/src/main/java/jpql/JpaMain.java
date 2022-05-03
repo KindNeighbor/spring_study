@@ -1,14 +1,7 @@
-package hellojpa;
-
-import org.hibernate.Hibernate;
+package jpql;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 public class JpaMain {
 
@@ -23,18 +16,15 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
+            member.setAge(10);
             em.persist(member);
 
-            //flush -> commit, query
+            Member result = em.createQuery(
+                    "select m from Member as m where m.username = :username", Member.class)
+                    .setParameter("username", "member1")
+                    .getSingleResult();
+            System.out.println("result = " + result.getUsername());
 
-            List<Member> resultList = em.createNativeQuery(
-                    "select MEMBER_ID, city, street, zipcode, " +
-                            "USERNAME from MEMBER", Member.class)
-                    .getResultList();
-
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1);
-            }
 
             tx.commit();
         } catch (Exception e) {
