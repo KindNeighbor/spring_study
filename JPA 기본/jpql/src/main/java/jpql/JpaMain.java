@@ -38,23 +38,15 @@ public class JpaMain {
             member3.setTeam(teamB);
             em.persist(member3);
 
-            em.flush();
+
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+
             em.clear();
 
-            String query = "select t from Team t join fetch t.members m";
-            List<Team> result = em.createQuery(query, Team.class)
-                .getResultList();
+            Member findMember = em.find(Member.class, member1.getId());
 
-            System.out.println("result = " + result.size());
-
-            for (Team team : result) {
-                System.out.println("team = " + team.getName() + "|members = " + team.getMembers().size());
-                for (Member member : team.getMembers()) {
-                    System.out.println("-> member = " + member);
-
-                }
-            }
-
+            System.out.println("findMember = " + findMember.getAge());
 
             tx.commit();
         } catch (Exception e) {
