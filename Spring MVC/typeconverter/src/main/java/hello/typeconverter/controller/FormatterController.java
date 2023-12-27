@@ -24,6 +24,8 @@ public class FormatterController {
 
     @PostMapping("/formatter/edit")
     public String formatterEdit(@ModelAttribute Form form) {
+        System.out.println("form.number = " + form.number);
+        System.out.println("form.localDateTime = " + form.localDateTime);
         return "formatter-view";
     }
 
