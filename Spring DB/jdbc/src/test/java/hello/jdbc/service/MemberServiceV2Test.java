@@ -34,14 +34,16 @@ class MemberServiceV2Test {
     @Test
     @DisplayName("정상 이체")
     void accountTransfer() throws SQLException {
+
         //given
         Member memberA = new Member("memberA", 10000);
         Member memberB = new Member("memberB", 10000);
         memberRepository.save(memberA);
         memberRepository.save(memberB);
+
         //when
-        memberService.accountTransfer(memberA.getMemberId(),
-            memberB.getMemberId(), 2000);
+        memberService.accountTransfer(memberA.getMemberId(), memberB.getMemberId(), 2000);
+
         //then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberB = memberRepository.findById(memberB.getMemberId());
